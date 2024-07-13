@@ -1,0 +1,64 @@
+if game.PlaceId == 662417684 then
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
+local Window = Library.CreateLib("Kak.Hub Speed City Script", "DarkTheme")
+
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Main")
+
+Section:NewButton("Auto İtem", "this button will spawn auto item", function()
+while true do
+    game:GetService("ReplicatedStorage"):WaitForChild("SpawnLuckyBlock"):FireServer()
+wait(0.5)
+end
+end)
+
+local plrs = {}
+for _, v in pairs(game.Players:GetPlayers()) do
+    table.insert(plrs, v.Name)
+end
+
+Section:NewDropdown("Chose A Player", "Chose A Player To Teleport That Player You Chose", plrs, function(currentOption)
+    local selectedPlayer = game.Players:FindFirstChild(currentOption)
+    if selectedPlayer then 
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = selectedPlayer.Character.HumanoidRootPart.CFrame
+    end
+end)
+
+local Tab = Window:NewTab("Player")
+local Section = Tab:NewSection("Player")
+
+Section:NewTextBox("WalkSpeed", "Change your WalkSpeed", function(Value)
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+end)
+
+Section:NewTextBox("JumpPower", "Change your JumpPower", function(Value)
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+end)
+
+local Tab = Window:NewTab("Others")
+local Section = Tab:NewSection("Credits and Others")
+
+Section:NewLabel("By Kaksakan")
+
+Section:NewButton("My Discord Server", "Click to copy my Discord Server link", function()
+    setclipboard("https://discord.gg/tNf6Fsvk")
+    print(Copied)
+end)
+
+Section:NewKeybind("On - Off Uİ", "KeybindInfo", Enum.KeyCode.F, function()
+	Library:ToggleUI()
+end)
+
+Section:NewButton("Mobile Keybord", "Use this if u are on MOBİLE", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+
+end)
+
+else
+    game:GetService("StarterGui"):SetCore("SendNotification",{
+        Title = "Babft Script",
+        Text = "Please join the Babft"
+    })
+end
